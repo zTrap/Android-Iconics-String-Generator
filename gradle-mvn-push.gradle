@@ -106,7 +106,6 @@ afterEvaluate { project ->
             source = variant.javaCompile.source
             ext.androidJar = project.files(android.getBootClasspath().join(File.pathSeparator))
             classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
-            exclude '**/BuildConfig.java'
             exclude '**/R.java'
         }
 
