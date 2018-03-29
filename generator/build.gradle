@@ -1,0 +1,30 @@
+apply plugin: 'com.android.library'
+
+group 'ru.ztrap.iconics'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+if (project.hasProperty('push')) {
+    apply from: '../gradle-mvn-push.gradle'
+    apply plugin: 'com.novoda.bintray-release'
+    apply from: '../gradle-jcenter-push.gradle'
+}
+
+dependencies {
+    implementation "com.mikepenz:iconics-core:$rootProject.ext.iconics"
+}

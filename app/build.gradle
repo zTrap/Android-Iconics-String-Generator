@@ -1,0 +1,26 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        applicationId "ru.ztrap.iconics"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    testImplementation 'com.mikepenz:google-material-typeface:3.0.1.2.original@aar'
+    testImplementation "com.mikepenz:iconics-core:$rootProject.ext.iconics"
+    testImplementation 'junit:junit:4.12'
+    testImplementation project(':generator')
+}
