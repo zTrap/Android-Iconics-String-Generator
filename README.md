@@ -20,7 +20,7 @@ public class TestStringGenerator {
 }
 ```
 
-2. Make this extends from `IconicsStringGenerator`
+2. Make it extends from `IconicsStringGenerator`
 
 ```java
 @RunWith(JUnit4.class)
