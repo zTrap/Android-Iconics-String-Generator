@@ -19,4 +19,9 @@ public class TestStringGenerator extends IconicsStringGenerator {
     public void generateGoogleMaterial() throws TransformerException, ParserConfigurationException {
         generateIconsFrom(new GoogleMaterial());
     }
+
+    @Override
+    protected FileCreationStrategy fileCreationStrategy() {
+        return FileCreationStrategy.SAVE_ONLY_CURRENT;
+    }
 }
