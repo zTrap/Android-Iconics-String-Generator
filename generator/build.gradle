@@ -18,6 +18,7 @@ android {
         }
     }
 }
+apply from: '../gradle-mvn-push.gradle'
 apply from: '../gradle-jcenter-push.gradle'
 
 dependencies {
