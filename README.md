@@ -1,4 +1,4 @@
-# Android-Iconics-String-Generator
+# Android-Iconics String Generator
 Icons fields generator for [Android-Iconics Library](https://github.com/mikepenz/Android-Iconics)
 
 [ ![Download](https://api.bintray.com/packages/ztrap/maven/string-generator/images/download.svg) ](https://bintray.com/ztrap/maven/string-generator/_latestVersion)
