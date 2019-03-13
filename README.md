@@ -26,7 +26,7 @@ class TestStringGenerator
 class TestStringGenerator : IconicsStringGenerator
 ```
 
-3. Implement method for definition file creation strategy
+3. Override field for definition file creation strategy
 
 ```kotlin
 @RunWith(JUnit4::class)
