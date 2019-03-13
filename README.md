@@ -55,7 +55,7 @@ class TestStringGenerator : IconicsStringGenerator {
 
 ## Optional settings
 
-You can override this methods as you need:
+You can override this fields as you need:
 
 ```kotlin
 /** @return modifier for mark file as current-version file */
