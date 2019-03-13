@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'org.jetbrains.dokka-android'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -7,20 +8,27 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1020
-        versionName '1.0.2'
+        versionCode 1030
+        versionName '1.0.3'
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+    lintOptions {
+        checkTestSources true
+        ignoreWarnings true
     }
 }
-apply from: '../gradle-mvn-push.gradle'
-apply from: '../gradle-jcenter-push.gradle'
+dokka {
+    outputFormat = 'javadoc'
+    outputDirectory = "$buildDir/javadoc"
+    sourceDirs = files('src/main/java')
+    packageOptions {
+        prefix = 'generator'
+    }
+}
+
+apply from: '../publishing.gradle'
 
 dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "com.mikepenz:iconics-core:$rootProject.ext.iconics"
 }

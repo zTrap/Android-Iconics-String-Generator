@@ -5,56 +5,49 @@ Icons fields generator for [Android-Iconics Library](https://github.com/mikepenz
 
 ## Install
 
-```groove
+```gradle
 testImplementation 'junit:junit:4.12' // required
-testImplementation 'ru.ztrap.iconics:string-generator:1.0.2'
+testImplementation 'ru.ztrap.iconics:string-generator:1.0.3'
 ```
 
 ## Usage
 
 1. Create some test-class in `test` directory
 
-```java
-@RunWith(JUnit4.class)
-public class TestStringGenerator {
-}
+```kotlin
+@RunWith(JUnit4::class)
+class TestStringGenerator
 ```
 
 2. Make it extends from `IconicsStringGenerator`
 
-```java
-@RunWith(JUnit4.class)
-public class TestStringGenerator extends IconicsStringGenerator {
-}
+```kotlin
+@RunWith(JUnit4::class)
+class TestStringGenerator : IconicsStringGenerator
 ```
 
 3. Implement method for definition file creation strategy
 
-```java
-@RunWith(JUnit4.class)
-public class TestStringGenerator extends IconicsStringGenerator {
-    @Override
-    protected FileCreationStrategy fileCreationStrategy() {
-        return FileCreationStrategy.SAVE_ONLY_CURRENT; // or FileCreationStrategy.SAVE_OLD
-    }
+```kotlin
+@RunWith(JUnit4::class)
+class TestStringGenerator : IconicsStringGenerator {
+    override val fileCreationStrategy: FileCreationStrategy 
+        get() = FileCreationStrategy.SAVE_ONLY_CURRENT // or FileCreationStrategy.SAVE_OLD
 }
 ```
 
-4. Create `@Test`-method wich will generate fields from your font
+4. Create `@Test`-method which will generate fields from your font
 
-```java
-@RunWith(JUnit4.class)
-public class TestStringGenerator extends IconicsStringGenerator {
+```kotlin
+@RunWith(JUnit4::class)
+class TestStringGenerator : IconicsStringGenerator {
     
-    @Test
-    public void generateGoogleMaterial() throws TransformerException, ParserConfigurationException {
-        generateIconsFrom(new GoogleMaterial());
+    @Test fun generateGoogleMaterial() {
+        generateIconsFrom(GoogleMaterial())
     }
 
-    @Override
-    protected FileCreationStrategy fileCreationStrategy() {
-        return FileCreationStrategy.SAVE_ONLY_CURRENT;
-    }
+    override val fileCreationStrategy: FileCreationStrategy 
+        get() = FileCreationStrategy.SAVE_ONLY_CURRENT
 }
 ```
 
@@ -64,20 +57,13 @@ public class TestStringGenerator extends IconicsStringGenerator {
 
 You can override this methods as you need:
 
-```java
-/**
- * @return modifier for mark file as current-version file
- * */
-protected String modifierCurrent() {
-    return "_current_";
-}
+```kotlin
+/** @return modifier for mark file as current-version file */
+protected open val modifierCurrent: String get() =  "_current_"
 
-/**
- * @return directory path for generated .xml file
- * */
-protected String outputDirectory() {
-    return "src" + File.separator + "main" + File.separator + "res" + File.separator + "values";
-}
+/** @return directory path for generated .xml file */
+protected open val outputDirectory: String
+    get() = "src${File.separator}main${File.separator}res${File.separator}values"
 ```
 
 ## Developed By
@@ -88,7 +74,7 @@ protected String outputDirectory() {
 
 ## License
 
-       Copyright 2018 zTrap
+       Copyright 2018-2019 zTrap
 
        Licensed under the Apache License, Version 2.0 (the "License");
        you may not use this file except in compliance with the License.
