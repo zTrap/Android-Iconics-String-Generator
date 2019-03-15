@@ -24,5 +24,5 @@ dependencies {
     testImplementation 'com.mikepenz:google-material-typeface:3.0.1.3.original@aar'
     testImplementation "com.mikepenz:iconics-core:$rootProject.ext.iconics"
     testImplementation 'junit:junit:4.12'
-    testImplementation project(':generator')
+    testImplementation project(':string-generator')
 }

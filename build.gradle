@@ -33,13 +33,3 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-
-task cleanBuildInstall(type: GradleBuild) {
-    group = "publishing"
-    tasks = ['clean', 'build', 'install']
-}
-
-task cleanBuildPublish(type: GradleBuild) {
-    group = "publishing"
-    tasks = ['cleanBuildInstall', 'bintrayUpload']
-}
