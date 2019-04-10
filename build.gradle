@@ -20,7 +20,7 @@ ext {
     compileSdkVersion = 28
     minSdkVersion = 14
     targetSdkVersion = 28
-    iconics = '3.2.1'
+    iconics = '3.2.3'
 }
 
 allprojects {

@@ -8,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1030
-        versionName '1.0.3'
+        versionCode Integer.parseInt(VERSION_CODE)
+        versionName VERSION_NAME
     }
 
     lintOptions {
@@ -17,6 +17,7 @@ android {
         ignoreWarnings true
     }
 }
+
 dokka {
     outputFormat = 'javadoc'
     outputDirectory = "$buildDir/javadoc"
