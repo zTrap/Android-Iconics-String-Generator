@@ -1,6 +1,7 @@
 package ru.ztrap.iconics
 
 import com.mikepenz.google_material_typeface_library.GoogleMaterial
+import org.junit.Ignore
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -10,6 +11,7 @@ import ru.ztrap.iconics.IconicsStringGenerator.FileCreationStrategy.SAVE_ONLY_CU
 /**
  * @author pa.gulko zTrap (29.03.2018)
  */
+@Ignore
 @RunWith(JUnit4::class)
 class TestStringGenerator : IconicsStringGenerator() {
 

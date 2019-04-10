@@ -44,7 +44,7 @@ abstract class IconicsStringGenerator {
     protected open fun generateIconsFrom(typeface: ITypeface) {
 
         val handledClassName = handleWords(typeface.fontName) + "_v"
-        val fileName = handledClassName + typeface.version + "." + XML
+        val fileName = "$handledClassName${typeface.version}.$XML"
         val fontDirectory = File(outputDirectory)
 
         val doc = DocumentBuilderFactory.newInstance()
@@ -113,7 +113,9 @@ abstract class IconicsStringGenerator {
         val clearedFieldName = fieldName.replace(" ", "")
         return buildString {
             UPPERCASE_PATTERN.split(clearedFieldName).forEach { word ->
-                if (isNotEmpty()) append(WORD_DELIMITER)
+                if (isNotEmpty()) {
+                    append(WORD_DELIMITER)
+                }
                 append(word.toLowerCase())
             }
         }
