@@ -17,11 +17,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+        main.java.setSrcDirs(Arrays.asList("src/main/kotlin"))
+        test.java.setSrcDirs(Arrays.asList("src/test/kotlin"))
+    }
 }
 
 dependencies {
     testImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    testImplementation 'com.mikepenz:google-material-typeface:3.0.1.3.original@aar'
+    testImplementation 'com.mikepenz:google-material-typeface:3.0.1.4.original-kotlin'
     testImplementation "com.mikepenz:iconics-core:$rootProject.ext.iconics"
     testImplementation 'junit:junit:4.12'
     testImplementation project(':string-generator')

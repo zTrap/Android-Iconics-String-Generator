@@ -16,6 +16,10 @@ android {
         checkTestSources true
         ignoreWarnings true
     }
+
+    sourceSets {
+        main.java.setSrcDirs(Arrays.asList("src/main/kotlin"))
+    }
 }
 
 dokka {

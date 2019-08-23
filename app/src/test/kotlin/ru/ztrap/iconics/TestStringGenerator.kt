@@ -1,6 +1,6 @@
 package ru.ztrap.iconics
 
-import com.mikepenz.google_material_typeface_library.GoogleMaterial
+import com.mikepenz.iconics.typeface.library.googlematerial.GoogleMaterial
 import org.junit.Ignore
 
 import org.junit.Test
@@ -11,15 +11,15 @@ import ru.ztrap.iconics.IconicsStringGenerator.FileCreationStrategy.SAVE_ONLY_CU
 /**
  * @author pa.gulko zTrap (29.03.2018)
  */
-@Ignore
+@Ignore("Not a test. Just Iconics icons fields generator")
 @RunWith(JUnit4::class)
 class TestStringGenerator : IconicsStringGenerator() {
 
     @Test fun generateGoogleMaterial() {
-        generateIconsFrom(GoogleMaterial())
+        generateIconsFrom(GoogleMaterial)
     }
 
-    override val fileCreationStrategy: FileCreationStrategy get() = SAVE_ONLY_CURRENT
+    override val fileCreationStrategy: FileCreationStrategy = SAVE_ONLY_CURRENT
 
-    override val modifierCurrent: String get() = ""
+    override val modifierCurrent: String = ""
 }
