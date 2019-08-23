@@ -6,6 +6,7 @@ android:
     - android-29
 before_install:
     - yes | sdkmanager "platforms;android-29"
+    - yes | sdkmanager "build-tools;29.0.0"
     - chmod +x gradlew
 jdk:
     - openjdk8
