@@ -31,7 +31,7 @@ dokka {
     }
 }
 
-apply from: '../publishing.gradle'
+apply from: 'https://gist.githubusercontent.com/zTrap/52825d8a03c42407da030adaf18dc35c/raw/232aabb793b42477247889bf1c9b2172c1e77efb/android-library-publishing.gradle'
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
