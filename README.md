@@ -47,7 +47,7 @@ class TestStringGenerator : IconicsStringGenerator {
 class TestStringGenerator : IconicsStringGenerator {
     
     @Test fun generateGoogleMaterial() {
-        generateIconsFrom(GoogleMaterial())
+        generateIconsFrom(GoogleMaterial)
     }
 
     override val fileCreationStrategy: FileCreationStrategy 
