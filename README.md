@@ -7,7 +7,7 @@ Icons fields generator for [Android-Iconics Library](https://github.com/mikepenz
 
 ```gradle
 testImplementation 'junit:junit:4.12' // required
-testImplementation 'ru.ztrap.iconics:string-generator:1.0.6'
+testImplementation 'ru.ztrap.iconics:string-generator:1.0.7'
 ```
 
 ## Usage
@@ -64,6 +64,9 @@ You can override this fields as you need:
 ```kotlin
 /** @return modifier for mark file as current-version file */
 protected open val modifierCurrent: String get() =  "_current_"
+
+/** @return modifier for mark file as old-version file */
+protected open val modifierOld: String get() =  "_old_"
 
 /** @return directory path for generated .xml file */
 protected open val outputDirectory: String

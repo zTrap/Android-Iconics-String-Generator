@@ -25,7 +25,6 @@ android {
 dokka {
     outputFormat = 'javadoc'
     outputDirectory = "$buildDir/javadoc"
-    sourceDirs = files('src/main/java')
     packageOptions {
         prefix = 'generator'
     }

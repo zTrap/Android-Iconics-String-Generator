@@ -1,6 +1,8 @@
 package ru.ztrap.iconics
 
 import com.mikepenz.iconics.typeface.ITypeface
+import ru.ztrap.iconics.IconicsStringGenerator.FileCreationStrategy.SAVE_OLD
+import ru.ztrap.iconics.IconicsStringGenerator.FileCreationStrategy.SAVE_ONLY_CURRENT
 
 import java.io.File
 import java.util.*
@@ -19,14 +21,35 @@ import javax.xml.transform.stream.StreamResult
  */
 abstract class IconicsStringGenerator {
 
+    /** kotlin companion object */
     companion object {
-        val UPPERCASE_PATTERN: Pattern = Pattern.compile("(?=\\p{Lu})")
+
+        /** File writer from DOM parser */
+        @get:Synchronized internal val TRANSFORMER by lazy {
+            TransformerFactory.newInstance().newTransformer().apply {
+                setOutputProperty(OutputKeys.ENCODING, "UTF-8")
+                setOutputProperty(OutputKeys.INDENT, "yes")
+                setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4")
+            }
+        }
+
+        /** Pattern to detect words in font name */
+        @JvmField val UPPERCASE_PATTERN: Pattern = Pattern.compile("(?=\\p{Lu})")
+        /** Delimiter for words in out file name */
         const val WORD_DELIMITER = "_"
+        /** File extension */
         const val XML = "xml"
     }
 
+    /** Strategy of file with strings creation */
     protected enum class FileCreationStrategy {
-        SAVE_OLD, SAVE_ONLY_CURRENT
+        /**
+         * Strategy to save old versions of strings file which will rename file with leading
+         * [modifierCurrent] and comment all string fields inside
+         */
+        SAVE_OLD,
+        /** Strategy to remove file with old version */
+        SAVE_ONLY_CURRENT
     }
 
     /** Define resolution strategy for new versions */
@@ -35,6 +58,10 @@ abstract class IconicsStringGenerator {
     /** @return modifier for mark file as current-version file */
     protected open val modifierCurrent: String
         get() = "_current_"
+
+    /** @return modifier for mark file as old-version file */
+    protected open val modifierOld: String
+        get() = "_old_"
 
     /** @return directory path for generated .xml file */
     protected open val outputDirectory: String
@@ -65,53 +92,63 @@ abstract class IconicsStringGenerator {
         resources.appendChild(comment2)
 
         typeface.icons.forEach {
-            doc.createElement("string")
-                    .apply {
-                        setAttribute("name", it)
-                        setAttribute("translatable", "false")
-                        textContent = it
-                    }
-                    .let { resources.appendChild(it) }
+            doc.createElement("string").apply {
+                setAttribute("name", it)
+                setAttribute("translatable", "false")
+                textContent = it
+                resources.appendChild(this)
+            }
         }
 
         val newFile = File(fontDirectory, "$modifierCurrent$fileName")
 
         if (newFile.exists()) {
-            // replace file's content with same version
+            // Replace file's content with the same version
             newFile.delete()
         }
 
-        /** search actual file with leading [modifierCurrent] */
+        /** Search actual file with leading [modifierCurrent] */
         val files = fontDirectory.listFiles { file ->
             file.name.matches(("$modifierCurrent$handledClassName.+\\.$XML").toRegex())
         }
 
         if (files?.isNotEmpty() == true) {
-            val current = files.first()
+            val old = files.first()
             when (fileCreationStrategy) {
-                FileCreationStrategy.SAVE_OLD -> {
-                    val renamed = File(fontDirectory, current.name.removePrefix(modifierCurrent))
-                    if (!current.renameTo(renamed)) {
-                        throwCantRenameFileException(renamed, current)
-                    }
-                }
-                FileCreationStrategy.SAVE_ONLY_CURRENT -> current.delete()
+                SAVE_OLD -> renameOld(fontDirectory, old)
+                SAVE_ONLY_CURRENT -> old.delete()
             }
         }
 
-        TransformerFactory.newInstance().newTransformer().apply {
-            setOutputProperty(OutputKeys.ENCODING, "UTF-8")
-            setOutputProperty(OutputKeys.INDENT, "yes")
-            setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4")
-            transform(DOMSource(doc), StreamResult(newFile))
-        }
+        TRANSFORMER.transform(DOMSource(doc), StreamResult(newFile))
     }
 
-    protected open fun handleWords(fieldName: String): String {
-        val clearedFieldName = fieldName.replace(" ", "")
+    /** To lower_snake_case words handler */
+    protected open fun handleWords(fontName: String): String {
+        val clearedFieldName = fontName.replace(" ", "")
         return UPPERCASE_PATTERN.split(clearedFieldName).joinToString(WORD_DELIMITER) {
             it.toLowerCase(Locale.getDefault())
         }
+    }
+
+    private fun renameOld(fontDirectory: File, old: File) {
+        val mapped = old.readText()
+                .lineSequence()
+                .filterNot { it.isBlank() }
+                .joinToString("\n") {
+                    if (it.trim().startsWith("<string")) {
+                        "    <!-- ${it.trim()} -->"
+                    } else {
+                        it
+                    }
+                }
+
+        val renamed = File(fontDirectory, modifierOld + old.name.removePrefix(modifierCurrent))
+        if (!old.renameTo(renamed)) {
+            throwCantRenameFileException(renamed, old)
+        }
+
+        renamed.writeText(mapped)
     }
 
     private fun throwCantRenameFileException(renamed: File, current: File) {

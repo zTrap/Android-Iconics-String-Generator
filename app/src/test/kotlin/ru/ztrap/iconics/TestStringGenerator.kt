@@ -6,7 +6,7 @@ import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import ru.ztrap.iconics.IconicsStringGenerator.FileCreationStrategy.SAVE_ONLY_CURRENT
+import ru.ztrap.iconics.IconicsStringGenerator.FileCreationStrategy.SAVE_OLD
 
 /**
  * @author pa.gulko zTrap (29.03.2018)
@@ -19,7 +19,5 @@ class TestStringGenerator : IconicsStringGenerator() {
         generateIconsFrom(GoogleMaterial)
     }
 
-    override val fileCreationStrategy: FileCreationStrategy = SAVE_ONLY_CURRENT
-
-    override val modifierCurrent: String = ""
+    override val fileCreationStrategy: FileCreationStrategy = SAVE_OLD
 }
