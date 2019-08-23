@@ -7,7 +7,7 @@ Icons fields generator for [Android-Iconics Library](https://github.com/mikepenz
 
 ```gradle
 testImplementation 'junit:junit:4.12' // required
-testImplementation 'ru.ztrap.iconics:string-generator:1.0.4'
+testImplementation 'ru.ztrap.iconics:string-generator:1.0.5'
 ```
 
 ## Usage
