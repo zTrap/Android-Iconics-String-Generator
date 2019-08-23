@@ -7,7 +7,7 @@ Icons fields generator for [Android-Iconics Library](https://github.com/mikepenz
 
 ```gradle
 testImplementation 'junit:junit:4.12' // required
-testImplementation 'ru.ztrap.iconics:string-generator:1.0.4'
+testImplementation 'ru.ztrap.iconics:string-generator:1.0.6'
 ```
 
 ## Usage
@@ -15,6 +15,7 @@ testImplementation 'ru.ztrap.iconics:string-generator:1.0.4'
 1. Create some test-class in `test` directory
 
 ```kotlin
+@Ignore("Not a test. Just Iconics icons fields generator")
 @RunWith(JUnit4::class)
 class TestStringGenerator
 ```
@@ -22,6 +23,7 @@ class TestStringGenerator
 2. Make it extends from `IconicsStringGenerator`
 
 ```kotlin
+@Ignore("Not a test. Just Iconics icons fields generator")
 @RunWith(JUnit4::class)
 class TestStringGenerator : IconicsStringGenerator
 ```
@@ -29,6 +31,7 @@ class TestStringGenerator : IconicsStringGenerator
 3. Override field for definition file creation strategy
 
 ```kotlin
+@Ignore("Not a test. Just Iconics icons fields generator")
 @RunWith(JUnit4::class)
 class TestStringGenerator : IconicsStringGenerator {
     override val fileCreationStrategy: FileCreationStrategy 
@@ -39,6 +42,7 @@ class TestStringGenerator : IconicsStringGenerator {
 4. Create `@Test`-method which will generate fields from your font
 
 ```kotlin
+@Ignore("Not a test. Just Iconics icons fields generator")
 @RunWith(JUnit4::class)
 class TestStringGenerator : IconicsStringGenerator {
     
