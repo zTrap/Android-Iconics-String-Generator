@@ -7,15 +7,20 @@ Icons fields generator for [Android-Iconics Library](https://github.com/mikepenz
 
 ```gradle
 testImplementation 'junit:junit:4.12' // required
-testImplementation 'ru.ztrap.iconics:string-generator:1.0.7'
+testImplementation 'ru.ztrap.iconics:string-generator:1.0.8'
 ```
+
+## Compatibility
+
+`string-generator v1.0.5` compatible with `iconics v3.2.x`
+`string-generator v1.0.7` compatible with `iconics v4.x.x`
+`string-generator v1.0.8` compatible with `iconics v5.x.x`
 
 ## Usage
 
 1. Create some test-class in `test` directory
 
 ```kotlin
-@Ignore("Not a test. Just Iconics icons fields generator")
 @RunWith(JUnit4::class)
 class TestStringGenerator
 ```
@@ -23,7 +28,6 @@ class TestStringGenerator
 2. Make it extends from `IconicsStringGenerator`
 
 ```kotlin
-@Ignore("Not a test. Just Iconics icons fields generator")
 @RunWith(JUnit4::class)
 class TestStringGenerator : IconicsStringGenerator
 ```
@@ -31,7 +35,6 @@ class TestStringGenerator : IconicsStringGenerator
 3. Override field for definition file creation strategy
 
 ```kotlin
-@Ignore("Not a test. Just Iconics icons fields generator")
 @RunWith(JUnit4::class)
 class TestStringGenerator : IconicsStringGenerator {
     override val fileCreationStrategy: FileCreationStrategy 
@@ -42,12 +45,11 @@ class TestStringGenerator : IconicsStringGenerator {
 4. Create `@Test`-method which will generate fields from your font
 
 ```kotlin
-@Ignore("Not a test. Just Iconics icons fields generator")
 @RunWith(JUnit4::class)
 class TestStringGenerator : IconicsStringGenerator {
     
     @Test fun generateGoogleMaterial() {
-        generateIconsFrom(GoogleMaterial)
+        generateIconsFrom(GoogleMaterial) // or GoogleMaterial.generateIcons()
     }
 
     override val fileCreationStrategy: FileCreationStrategy 
@@ -76,12 +78,12 @@ protected open val outputDirectory: String
 ## Developed By
 
  - Peter Gulko
- - contacts@ztrap.ru
+ - ztrap.developer@gmail.com
  - [paypal.me/zTrap](https://www.paypal.me/zTrap)
 
 ## License
 
-       Copyright 2018-2019 zTrap
+       Copyright 2018-2020 zTrap
 
        Licensed under the Apache License, Version 2.0 (the "License");
        you may not use this file except in compliance with the License.

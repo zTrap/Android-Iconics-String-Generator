@@ -6,7 +6,6 @@ import ru.ztrap.iconics.IconicsStringGenerator.FileCreationStrategy.SAVE_ONLY_CU
 
 import java.io.File
 import java.util.*
-import java.util.regex.Pattern
 
 import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.parsers.ParserConfigurationException
@@ -34,7 +33,7 @@ abstract class IconicsStringGenerator {
         }
 
         /** Pattern to detect words in font name */
-        @JvmField val UPPERCASE_PATTERN: Pattern = Pattern.compile("(?=\\p{Lu})")
+        @JvmField val UPPERCASE_PATTERN: Regex = "(?=\\p{Lu})".toRegex()
         /** Delimiter for words in out file name */
         const val WORD_DELIMITER = "_"
         /** File extension */
@@ -66,6 +65,11 @@ abstract class IconicsStringGenerator {
     /** @return directory path for generated .xml file */
     protected open val outputDirectory: String
         get() = "src${File.separator}main${File.separator}res${File.separator}values"
+
+    /** Magic lives here */
+    protected fun ITypeface.generateIcons() {
+        generateIconsFrom(this)
+    }
 
     /** Magic lives here */
     @Throws(ParserConfigurationException::class, TransformerException::class)
