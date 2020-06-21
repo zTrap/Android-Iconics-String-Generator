@@ -13,7 +13,9 @@ testImplementation 'ru.ztrap.iconics:string-generator:1.0.8'
 ## Compatibility
 
 `string-generator v1.0.5` compatible with `iconics v3.2.x`
+
 `string-generator v1.0.7` compatible with `iconics v4.x.x`
+
 `string-generator v1.0.8` compatible with `iconics v5.x.x`
 
 ## Usage
